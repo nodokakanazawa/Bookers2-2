@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+        <%= render 'list1', user: @user %>
+        <%= render 'books/list', book: @book %>
+    </div>
+    <div class="col-lg-8">
+      <h1>Books</h1>
+        <table class="table table-striped">
+            <thead>
+            <th>Title</th>
+            <th>Opinion</th>
+            </thead>
+            <tbody>
+            <% @books.each do |book| %>
+            <tr>
+              <td><%= link_to book.title ,book_path(book) %></td>
+              <td><%= book.body%></td>
+            </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+
+
