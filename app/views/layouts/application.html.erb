@@ -5,49 +5,86 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
 
     <script src="https://kit.fontawesome.com/cfdc0db2d8.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
 
 
   </head>
 
-  <header>
+  <header class="shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <div class="navbar-brand p-3">
+        <%= link_to "Bookers",root_path, class: "text-light" %>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
 
-        <li class="box"><%= link_to "Bookers",root_path %></li>
-      <% if user_signed_in? %>
-        <li class="box" >
-          <%= link_to "Home",user_path(current_user.id) %>
-        </li>
-        <li class="box">
-          <%= link_to "Users",users_path %>
-        </li>
-        <li class="box">
-          <%= link_to "Books", books_path %></li>
-        <li class="box">
-          <%= link_to "Log out", destroy_user_session_path , method: :delete %>
-        </li>
-      <% else %>
-        <li class="box" >
-          <%= link_to "Home",root_path %>
-        </li>
-        <li class="box">
-          <%= link_to "About" , about_path %>
-        </li>
-        <li class="box">
-          <%= link_to "Sign up", new_user_registration_path %>
-        </li>
-        <li class="box">
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
+          <li class="nav-item">
+            <%= link_to(user_path(current_user.id), class: "text-light") do %>
+              <strong><i class="fas fa-home"></i><span>Home</span></strong>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to(users_path, class: "text-light") do %>
+              <strong><i class="fas fa-users"></i><span>Users</span></strong>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(books_path, class: "text-light") do %>
+              <strong><i class="fas fa-book-open"></i><span>Books</span></strong>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(destroy_user_session_path, method: :delete, class: "text-light") do %>
+              <strong><i class="fas fa-sign-out-alt"></i><span>Log out</span></strong>
+            <% end %>
+          </li>
+
+          <% else %>
+          <li class="nav-item">
+            <%= link_to(root_path, class: "text-light") do %>
+              <strong><i class="fas fa-home"></i><span>Home</span></strong>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(about_path, class: "text-light") do %>
+              <strong><i class="fas fa-link"></i><span>About</span></strong>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(new_user_registration_path, class: "text-light") do %>
+              <strong><i class="fas fa-user-plus"></i><span>Sign up</span></strong>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(new_user_session_path, class: "text-light") do %>
+              <strong><i class="fas fa-sign-in-alt"></i><span>Log in</span></strong>
+            <% end %>
+          </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
-      <% flash.each do |message_type, message| %>
-        <div class="flash-message <%= message_type %>"><%= message %></div>
-      <% end %>
-
+        <% flash.each do |message_type, message| %>
+          <div class="flash-message <%= message_type %>"><%= message %></div>
+        <% end %>
     <%= yield %>
+
+
+
+
+  <footer>
+    <div class="container text-center">
+          <p>CopyRight Infratop.inc</p>
+    </div>
+  </footer>
 </html>

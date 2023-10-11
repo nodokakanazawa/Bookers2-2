@@ -1,4 +1,4 @@
-class CreateBooks < ActiveRecord::Migration[7.1]
+class CreateBooks < ActiveRecord::Migration[6.1]
   def change
     create_table :books do |t|
 
